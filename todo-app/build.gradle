@@ -20,10 +20,22 @@ application {
     mainClass = 'com.manning.gia.todo.ToDoApp'
 }
 
+// Using and creating an Executable Jar
 jar {
     manifest {
         attributes 'Main-Class':'com.manning.gia.todo.ToDoApp'
     }
+}
+
+// Run application with JavaExec task
+task runWithJavaExec(type: JavaExec) {
+    dependsOn classes
+
+    classpath configurations.runtimeClasspath, sourceSets.main.output.classesDirs
+    mainClass.set('com.manning.gia.todo.ToDoApp')
+    standardInput = System.in
+
+    println "classpath: " + classpath
 }
 
 test {
@@ -32,9 +44,6 @@ test {
 
     // Discover and execute JUnit Platform-based tests
     useJUnitPlatform() // spock using this feature to execute tests.
-
-    // Discover and execute TestNG-based tests
-    //useTestNG() // testNG using this to execute tests.
 
     // With JUnit Platform, only includes and excludes are used to filter test classes — scanForTestClasses has no effect.
     include 'mjg/**/*'
@@ -65,9 +74,7 @@ repositories {
 }
 
 dependencies {
-    implementation enforcedPlatform('org.codehaus.groovy:groovy-bom:3.0.9')
-    implementation 'org.codehaus.groovy:groovy-all:3.0.9'
-    implementation 'org.codehaus.groovy:groovy-dateutil:3.0.9'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     testImplementation 'junit:junit:4.13.2' //for java junit 4 test, can remove this if only using groovy write tests.
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
