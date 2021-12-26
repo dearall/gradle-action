@@ -1,0 +1,82 @@
+plugins {
+    id 'application'
+}
+
+group 'com.manning.gia'
+version '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+        vendor = JvmVendorSpec.ADOPTOPENJDK
+    }
+}
+
+wrapper {
+    gradleVersion = '7.3.3'
+}
+
+application {
+    mainClass = 'com.manning.gia.todo.ToDoApp'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class':'com.manning.gia.todo.ToDoApp'
+    }
+}
+
+test {
+    // Discover and execute JUnit4-based tests
+    useJUnit() // Junit 4/3 using this feature to execute tests.
+
+    // Discover and execute JUnit Platform-based tests
+    useJUnitPlatform() // spock using this feature to execute tests.
+
+    // Discover and execute TestNG-based tests
+    //useTestNG() // testNG using this to execute tests.
+
+    // With JUnit Platform, only includes and excludes are used to filter test classes — scanForTestClasses has no effect.
+    include 'mjg/**/*'
+
+    // listen to events in the test execution lifecycle
+    /*
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }*/
+
+    // Fail the 'test' task on the first test failure
+    failFast = true
+
+    // listen to standard out and standard error of the test JVM(s)
+    /*
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+    }*/
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation enforcedPlatform('org.codehaus.groovy:groovy-bom:3.0.9')
+    implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+    implementation 'org.codehaus.groovy:groovy-dateutil:3.0.9'
+
+    testImplementation 'junit:junit:4.13.2' //for java junit 4 test, can remove this if only using groovy write tests.
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
+
+    testImplementation platform("org.spockframework:spock-bom:2.0-groovy-3.0")
+    testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+    testImplementation "org.spockframework:spock-core:2.0-groovy-3.0:javadoc@jar"
+    testImplementation "org.spockframework:spock-core:2.0-groovy-3.0:sources@jar"
+
+    // you can remove this if your code does not rely on old JUnit 4 rules
+    testImplementation 'org.spockframework:spock-junit4:2.0-groovy-3.0'
+}
