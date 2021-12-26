@@ -21,7 +21,8 @@ public class CommandLineInputHandler {
     }
 
     public String readInput() {
-        return System.console().readLine("> ");
+        java.io.Console console = System.console();
+        return new java.util.Scanner(System.in).useDelimiter(System.getProperty("line.separator")).next();
     }
 
     public void processInput(CommandLineInput input) {
