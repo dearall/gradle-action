@@ -29,13 +29,14 @@ gretty {
 }
 
 repositories {
-    //mavenCentral()
+    mavenCentral()
 	maven { url 'https://maven.aliyun.com/repository/central' }
 }
 
 dependencies {
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-    providedCompile 'javax.servlet.jsp:jsp-api:2.1'
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+
     runtimeOnly 'javax.servlet:jstl:1.2'
-    runtimeOnly 'taglibs:standard:1.1.2'
+    runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
 }
