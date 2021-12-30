@@ -4,8 +4,7 @@ plugins {
 }
 
 group = 'com.manning.gia'
-version = 1.0
-
+apply from: "$rootDir/gradle/versioning.gradle"
 
 java {
     toolchain {

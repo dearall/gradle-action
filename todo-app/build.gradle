@@ -38,4 +38,8 @@ task runWithJavaExec(type: JavaExec) {
     classpath configurations.runtimeClasspath, sourceSets.main.output.classesDirs
     mainClass.set('com.manning.gia.todo.ToDoApp')
     standardInput = System.in
+
+    doFirst{
+        logger.quiet( "classpath: " + classpath.toString())
+    }
 }
