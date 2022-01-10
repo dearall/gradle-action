@@ -1,5 +1,6 @@
 plugins {
     id 'war'
+    id 'java'
 
     //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
     id "org.gretty" version "3.0.7"
@@ -8,8 +9,6 @@ plugins {
     id "com.bmuschko.cargo" version "2.8.0"
 }
 
-group = 'com.manning.gia'
-apply from: "$rootDir/gradle/versioning.gradle"
 
 java {
     toolchain {
@@ -18,9 +17,9 @@ java {
     }
 }
 
-wrapper {
-    gradleVersion = '7.3.3'
-}
+//wrapper {
+//    gradleVersion = '7.3.3'
+//}
 
 // configure gretty extension properties
 gretty {
@@ -40,7 +39,7 @@ cargo {
     port = 8080
 
     deployable {
-        file = 'build/libs/todo-webapp-1.0.0.war'
+        file = 'build/libs/todo-web-1.0.0.war'
         context = '/todo'
     }
 
@@ -59,32 +58,19 @@ cargo {
     }
 }
 
-
-repositories {
-    //aliyun.com
-    maven { url 'https://maven.aliyun.com/repository/public' }          // public aliyun central仓和jcenter仓的聚合仓
-	maven { url 'https://maven.aliyun.com/repository/central' }         //central
-    maven { url 'https://maven.aliyun.com/repository/google' }          //google
-    maven { url 'https://maven.aliyun.com/repository/spring' }          //spring
-    maven { url 'https://maven.aliyun.com/repository/gradle-plugin'}    //gradle-plugin
-    maven { url 'https://maven.aliyun.com/repository/spring-plugin'}    //spring-plugin
-
-    //jitpack.io
-    maven { url 'https://jitpack.io' }
-
-    //163.com
-    maven {
-        url 'http://mirrors.163.com/maven/repository/maven-public'
-        allowInsecureProtocol = true
-    }
-
-    mavenCentral()
-}
-
 dependencies {
+    implementation project(':todo-model')
+    implementation project(':todo-repository')
+
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
     providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
 
     runtimeOnly 'javax.servlet:jstl:1.2'
     runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
+
+    testImplementation 'junit:junit:4.13.2'
+}
+
+test {
+    useJUnitPlatform()
 }
