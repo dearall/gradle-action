@@ -62,13 +62,15 @@ dependencies {
     implementation project(':todo-model')
     implementation project(':todo-repository')
 
-    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
-    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
+    providedCompile libs.servlet.api
+    providedCompile libs.jsp.api
 
-    runtimeOnly 'javax.servlet:jstl:1.2'
-    runtimeOnly 'org.apache.taglibs:taglibs-standard-impl:1.2.5'
+    runtimeOnly libs.jstl
+    runtimeOnly libs.taglibs.standard.impl
 
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation (libs.junit4)
+    testImplementation (libs.junit.jupiter.api)
+    testRuntimeOnly (libs.junit.jupiter.engine)
 }
 
 test {

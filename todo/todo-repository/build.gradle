@@ -5,8 +5,11 @@ plugins {
 dependencies {
     implementation project(':todo-model')
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation(libs.bundles.groovy)
+
+    testImplementation (libs.junit4)
+    testImplementation (libs.junit.jupiter.api)
+    testRuntimeOnly (libs.junit.jupiter.engine)
 }
 
 test {

@@ -8,10 +8,9 @@
  */
 
 rootProject.name = 'todo'
+include 'todo-model', 'todo-repository', 'todo-web'
 
-include 'todo-model'
-include 'todo-repository'
-include 'todo-web'
+enableFeaturePreview('VERSION_CATALOGS')
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
@@ -34,6 +33,37 @@ dependencyResolutionManagement {
         }
 
         mavenCentral()
+    }
+
+    versionCatalogs {
+        libs {
+            //versions
+            version('groovy', '3.0.9')
+            version('jupiter', '5.8.2')
+
+            //aliases
+            alias('groovy-core').to('org.codehaus.groovy', 'groovy').versionRef('groovy')
+            alias('groovy-json').to('org.codehaus.groovy', 'groovy-json').versionRef('groovy')
+            alias('groovy-nio').to('org.codehaus.groovy', 'groovy-nio').versionRef('groovy')
+            alias('commons-lang3').to('org.apache.commons', 'commons-lang3').version {
+                strictly '[3.8.0, 4.0.0['
+                prefer '3.12.0'
+            }
+
+            alias('servlet-api').to('javax.servlet:javax.servlet-api:4.0.1')
+            alias('jsp-api').to('javax.servlet.jsp:javax.servlet.jsp-api:2.3.3')
+            alias('jstl').to('javax.servlet:jstl:1.2')
+            alias('taglibs-standard-impl').to('org.apache.taglibs:taglibs-standard-impl:1.2.5')
+            alias('junit4').to('junit:junit:4.13.2')
+
+            alias('junit-jupiter-api').to('org.junit.jupiter', 'junit-jupiter-api').versionRef('jupiter')
+            alias('junit-jupiter-engine').to('org.junit.jupiter', 'junit-jupiter-engine').versionRef('jupiter')
+
+
+            //bundles
+            bundle('groovy', ['groovy-core', 'groovy-json', 'groovy-nio'])
+            bundle('junit-jupiter', ['junit-jupiter-api', 'junit-jupiter-engine'])
+        }
     }
 }
 
