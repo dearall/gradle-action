@@ -19,11 +19,14 @@ tasks.withType(Test).configureEach {
     // Discover and execute JUnit Platform-based tests
     useJUnitPlatform() // spock using this feature to execute tests.
 
-    // Discover and execute TestNG-based tests
-    //useTestNG() // testNG using this to execute tests.
     // With JUnit Platform, only includes and excludes are used to filter test classes
     // — scanForTestClasses has no effect.
-    include 'com/manning/gia/todo/**'
+    include 'com/manning/gia/todo/**/*'
+
+    // Discover and execute TestNG-based tests
+    // testNG using this to execute tests.
+    // useTestNG()
+
     // listen to events in the test execution lifecycle
     /*
     beforeTest { descriptor ->
@@ -47,6 +50,13 @@ tasks.withType(Test).configureEach {
     }
 }
 
+test {
+    forkEvery = 5
+    maxParallelForks = determineMaxParallelForks()
+
+    println("maxParallelForks: " + maxParallelForks)
+}
+
 dependencies {
     testImplementation (libs.junit.jupiter.api)
     testRuntimeOnly (libs.junit.jupiter.engine)
@@ -56,4 +66,8 @@ dependencies {
     testImplementation (libs.testng)
     testImplementation (libs.spock.core)
     testImplementation (libs.spock.junit4)
+}
+
+static def determineMaxParallelForks() {
+    (Runtime.runtime.availableProcessors() / 2) < 1 ? 1 : Runtime.runtime.availableProcessors() / 2
 }

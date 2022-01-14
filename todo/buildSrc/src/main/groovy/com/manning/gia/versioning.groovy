@@ -1,4 +1,6 @@
-import com.manning.gia.ProjectVersion
+package com.manning.gia
+
+import org.gradle.api.GradleException
 
 ext.versionFile = file('version.properties')
 

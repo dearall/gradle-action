@@ -26,6 +26,8 @@ spock-junit4 = {module = "org.spockframework:spock-junit4", version.ref = "spock
 junit4 = "junit:junit:4.13.2"
 testng = "org.testng:testng:7.5"
 
+slf4j-simple = 'org.slf4j:slf4j-simple:1.7.32'
+
 
 
 

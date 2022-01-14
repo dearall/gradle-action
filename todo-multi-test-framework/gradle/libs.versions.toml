@@ -7,7 +7,6 @@ spock   = "2.0-groovy-3.0"
 
 
 [libraries]
-
 groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 groovy-json = { module = "org.codehaus.groovy:groovy-json", version.ref = "groovy" }
 groovy-nio = { module = "org.codehaus.groovy:groovy-nio", version.ref = "groovy" }
@@ -26,6 +25,7 @@ spock-junit4 = {module = "org.spockframework:spock-junit4", version.ref = "spock
 junit4 = "junit:junit:4.13.2"
 testng = "org.testng:testng:7.5"
 
+slf4j-simple = 'org.slf4j:slf4j-simple:1.7.32'
 
 
 
