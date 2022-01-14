@@ -21,7 +21,7 @@ tasks.withType(Test).configureEach {
 
     // With JUnit Platform, only includes and excludes are used to filter test classes
     // — scanForTestClasses has no effect.
-    include 'com/manning/gia/todo/**/*'
+    include '**/*'
     // listen to events in the test execution lifecycle
     /*
     beforeTest { descriptor ->

@@ -10,3 +10,15 @@ dependencies {
     implementation(libs.bundles.groovy)
     testImplementation(libs.slf4j.simple)
 }
+
+tasks.register('testNG', Test) {
+    useTestNG()
+    // 按照命名约定，只包含 NGTest
+    include "**/*NGTest"
+}
+
+test {
+    // 从默认 test 中排除 testNG 测试
+    exclude "**/*NGTest"
+    dependsOn 'testNG'
+}

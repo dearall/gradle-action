@@ -10,10 +10,13 @@ dependencies {
     testImplementation(libs.slf4j.simple)
 }
 
-task testNG(type: Test) {
+tasks.register('testNG', Test) {
     useTestNG()
-    filter {
-        //all classes in package, recursively
-        includeTestsMatching "com.manning.gia.todo.repository.*NGTest"
-    }
+    include "**/*NGTest"
+}
+
+test {
+    // 从默认 test 中排除 testNG 测试
+    exclude "**/*NGTest"
+    dependsOn 'testNG'
 }

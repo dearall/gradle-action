@@ -21,7 +21,7 @@ tasks.withType(Test).configureEach {
 
     // With JUnit Platform, only includes and excludes are used to filter test classes
     // — scanForTestClasses has no effect.
-    include 'com/manning/gia/todo/**/*'
+    include '**/*'
 
     // Discover and execute TestNG-based tests
     // testNG using this to execute tests.
