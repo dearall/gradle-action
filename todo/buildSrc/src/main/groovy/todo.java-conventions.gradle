@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'groovy'
 }
 
 group = 'com.manning.gia.todo'
@@ -12,6 +13,30 @@ java {
     }
 }
 
+//创建 integrationTest sourceSet
+def integrationTest = sourceSets.create('integrationTest')
+
+configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
+configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
+
+//注册添加 integrationTest task
+def integrationTestTask = tasks.register('integrationTest', Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = integrationTest.output.classesDirs
+    classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
+
+    shouldRunAfter(tasks.named('test'))
+
+    forkEvery = 5
+    maxParallelForks = determineMaxParallelForks()
+
+    println 'integrationTest.implementationConfigurationName: ' + integrationTest.implementationConfigurationName
+    println 'integrationTest.runtimeOnlyConfigurationName: ' + integrationTest.runtimeOnlyConfigurationName
+    println 'integrationTest.runtimeClasspathConfigurationName: ' + integrationTest.runtimeClasspathConfigurationName
+}
+
 tasks.withType(Test).configureEach {
     // Discover and execute JUnit4-based tests
     useJUnit() // Junit 4/3 using this feature to execute tests.
@@ -22,6 +47,11 @@ tasks.withType(Test).configureEach {
     // With JUnit Platform, only includes and excludes are used to filter test classes
     // — scanForTestClasses has no effect.
     include '**/*'
+
+    // Discover and execute TestNG-based tests
+    // testNG using this to execute tests.
+    // useTestNG()
+
     // listen to events in the test execution lifecycle
     /*
     beforeTest { descriptor ->
@@ -52,6 +82,9 @@ test {
     println("maxParallelForks: " + maxParallelForks)
 }
 
+tasks.named('check') {
+    dependsOn(integrationTestTask)
+}
 
 dependencies {
     testImplementation (libs.junit.jupiter.api)
@@ -62,6 +95,8 @@ dependencies {
     testImplementation (libs.testng)
     testImplementation (libs.spock.core)
     testImplementation (libs.spock.junit4)
+
+    integrationTestImplementation project
 }
 
 static def determineMaxParallelForks() {
