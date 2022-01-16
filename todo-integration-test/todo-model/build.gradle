@@ -1,0 +1,13 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'java-library'
+}
+
+dependencies {
+    testImplementation (libs.junit4)
+    testImplementation (libs.junit.jupiter.api)
+    testRuntimeOnly (libs.junit.jupiter.engine)
+    testRuntimeOnly (libs.junit.vintage.engine)
+    testImplementation (libs.spock.core)
+    testImplementation (libs.spock.junit4)
+}

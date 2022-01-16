@@ -8,6 +8,7 @@ dependencies {
     implementation project(':todo-model')
     implementation(libs.bundles.groovy)
     testImplementation(libs.slf4j.simple)
+    runtimeOnly(libs.h2)
 }
 
 tasks.register('testNG', Test) {

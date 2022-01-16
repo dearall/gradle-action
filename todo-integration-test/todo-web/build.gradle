@@ -1,0 +1,71 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'war'
+
+    //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
+    id "org.gretty" version "3.0.7"
+
+    //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
+    id "com.bmuschko.cargo" version "2.8.0"
+}
+
+
+//wrapper {
+//    gradleVersion = '7.3.3'
+//}
+
+// configure gretty extension properties
+gretty {
+    servletContainer = 'tomcat9'
+    httpPort = 9090
+    contextPath ="/todo"
+
+    scanInterval = 1 //Scan for changes every second
+    host = '0.0.0.0' //Enable network access from outside your local machine
+    //managedClassReload = true //Activate spring-loaded class reloading
+    integrationTestTask = 'integrationTest'
+}
+
+// configure cargo extension properties
+cargo {
+    containerId = 'tomcat9x'
+    port = 8080
+
+    deployable {
+        file = 'build/libs/todo-web-1.0.0.war'
+        context = '/todo'
+    }
+
+    //部署至远程主机 tomcat9 安装实例
+    remote {
+        hostname = 'tomcat.sansovo.org'
+        username = 'tomcat'
+        password = 'tomcat'
+    }
+    //部署至本机 tomcat9 安装实例
+    local {
+        homeDir = file(/D:\env\tomcat\apache-tomcat-9.0.56/)
+        containerProperties {
+            property 'cargo.tomcat.ajp.port', 8009
+        }
+    }
+}
+
+dependencies {
+    implementation project(':todo-model')
+    implementation project(':todo-repository')
+
+    implementation(libs.bundles.groovy)
+    providedCompile libs.servlet.api
+    providedCompile libs.jsp.api
+
+    runtimeOnly libs.jstl
+    runtimeOnly libs.taglibs.standard.impl
+
+    testImplementation (libs.junit4)
+    testImplementation (libs.junit.jupiter.api)
+    testRuntimeOnly (libs.junit.jupiter.engine)
+    testRuntimeOnly (libs.junit.vintage.engine)
+    testImplementation (libs.spock.core)
+    testImplementation (libs.spock.junit4)
+}
