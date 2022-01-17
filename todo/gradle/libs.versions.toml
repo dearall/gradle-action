@@ -37,4 +37,6 @@ groovy = ["groovy-core", "groovy-json", "groovy-nio"]
 junit-jupiter = ['junit-jupiter-api', 'junit-jupiter-engine']
 
 [plugins]
+# Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
+gretty = { id = "org.gretty", version = "3.0.7" }
 
