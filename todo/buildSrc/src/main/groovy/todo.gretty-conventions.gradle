@@ -6,7 +6,7 @@ plugins {
 // configure gretty extension properties
 gretty {
     servletContainer = 'tomcat9'
-    httpPort = 9090
+    httpPort = 8080
     contextPath ="/todo"
 
     scanInterval = 1 //Scan for changes every second

@@ -1,11 +1,11 @@
 plugins {
     id 'todo.java-conventions'
-    id 'war'
+    id 'todo.war-conventions'
 
     //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
     id 'todo.gretty-conventions'
     //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
-    id 'todo.bmuschko-conventions'
+    id 'todo.cargo-conventions'
 }
 
 dependencies {
@@ -17,4 +17,12 @@ dependencies {
 
     runtimeOnly libs.jstl
     runtimeOnly libs.taglibs.standard.impl
+
+    testImplementation(libs.slf4j.simple)
+}
+
+//针对嵌入式 cargo 运行功能测试
+tasks.named('functionalTest') {
+    dependsOn cargoStartLocal
+    finalizedBy cargoStopLocal
 }

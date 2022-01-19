@@ -13,7 +13,7 @@ java {
     }
 }
 
-//创建 integrationTest sourceSet
+//集成测试： 创建 integrationTest sourceSet
 def integrationTest = sourceSets.create('integrationTest')
 
 configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
