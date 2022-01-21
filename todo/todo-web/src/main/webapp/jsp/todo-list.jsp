@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>To Do application</title>
+    <script type="text/javascript" src="<c:url value="js/ext/jquery-1.12.4-min.js"/>"></script>
+    <c:import url="app-js.jsp"/>
     <link rel="stylesheet" href="<c:url value="css/base.css"/>">
 </head>
 <body>
@@ -21,24 +23,23 @@
         <label for="toggle-all">Mark all as complete</label>
         <ul id="todo-list">
             <c:forEach var="toDoItem" items="${toDoItems}" varStatus="status">
-                <li id="toDoItem_${status.count}" class="<c:if test="${toDoItem.completed}">completed</c:if>" ondblclick="javascript:document.getElementById('toDoItem_${status.count}').className += ' editing';document.getElementById('toDoItemName_${status.count}').focus();">
+                <li id="toDoItem_${status.count}" class="<c:if test="${toDoItem.completed}">completed</c:if>" ondblclick="javascript:editToDoItem(${status.count});">
                     <div class="view">
                         <form id="toggleForm_${status.count}" action="<c:url value="toggleStatus"/>" method="POST">
                             <input type="hidden" name="id" value="${toDoItem.id}"/>
                             <input type="hidden" name="filter" value="${filter}"/>
                             <input class="toggle" name="toggle" type="checkbox" <c:if test="${toDoItem.completed}">checked</c:if> onchange="javascript:document.getElementById('toggleForm_${status.count}').submit();">
                         </form>
-                        <label>${toDoItem.name}</label>
+                        <label id="toDoItemLabel_${status.count}">${toDoItem.name}</label>
                         <form action="<c:url value="delete"/>" method="POST">
                             <input type="hidden" name="id" value="${toDoItem.id}"/>
                             <input type="hidden" name="filter" value="${filter}"/>
                             <button class="destroy"></button>
                         </form>
                     </div>
-                    <form id="updateForm_${status.count}" action="<c:url value="update"/>" method="POST">
-                        <input type="hidden" name="id" value="${toDoItem.id}"/>
-                        <input type="hidden" name="filter" value="${filter}"/>
-                        <input class="edit" id="toDoItemName_${status.count}" name="name" value="${toDoItem.name}" onblur="javascript:document.getElementById('updateForm_${status.count}').submit();"/>
+                    <form id="updateForm_${status.count}">
+                        <input type="hidden" id="toDoItemId_${status.count}" name="id" value="${toDoItem.id}"/>
+                        <input class="edit" id="toDoItemName_${status.count}" name="name" value="${toDoItem.name}" onblur="javascript:updateToDoItem(${status.count});"/>
                     </form>
                 </li>
             </c:forEach>

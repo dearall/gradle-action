@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class FirstScriptTest {
@@ -20,8 +18,7 @@ public class FirstScriptTest {
 
         driver.get("https://www.baidu.com");
 
-        System.out.println("driver.getTitle(): " + driver.getTitle());
-        //Assertions.assertEquals("百度一下，你就知道", driver.getTitle());
+        System.out.println("driver.getTitle(): " + driver.getTitle().trim());
 
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MICROSECONDS);
 

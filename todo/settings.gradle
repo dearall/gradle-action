@@ -33,6 +33,17 @@ dependencyResolutionManagement {
         }
 
         mavenCentral()
+
+        ivy {
+            name 'JQuery'
+            url 'https://code.jquery.com'
+            patternLayout {
+                artifact '[module]-[revision](.[classifier]).[ext]'
+            }
+            metadataSources {
+                artifact()
+            }
+        }
     }
 }
 
