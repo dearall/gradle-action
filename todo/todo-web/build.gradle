@@ -39,3 +39,4 @@ tasks.named('functionalTest') {
 
 apply from: "jsDependencies.gradle"
 war.dependsOn fetchExternalJs
+apply from: "jsOptimize.gradle"

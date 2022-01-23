@@ -45,7 +45,7 @@ selenium-chrome-driver = {module = "org.seleniumhq.selenium:selenium-chrome-driv
 # chromedriver, geckodriver, msedgedriver, etc.) in a fully automated manner.
 webdrivermanager = 'io.github.bonigarcia:webdrivermanager:5.0.3'
 
-
+closure-compiler = "com.google.javascript:closure-compiler:v20131014"
 
 
 

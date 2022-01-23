@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         //aliyun.com
-        maven { url 'https://maven.aliyun.com/repository/public' }          // public aliyun central仓和jcenter仓的聚合仓
+        //maven { url 'https://maven.aliyun.com/repository/public' }          // public aliyun central仓和jcenter仓的聚合仓
         maven { url 'https://maven.aliyun.com/repository/central' }         //central
         maven { url 'https://maven.aliyun.com/repository/google' }          //google
         maven { url 'https://maven.aliyun.com/repository/spring' }          //spring
