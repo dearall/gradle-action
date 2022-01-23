@@ -1,0 +1,11 @@
+plugins {
+    id 'groovy'
+}
+
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs = ['src/main/java', 'src/main/groovy']
+
+dependencies {
+    implementation enforcedPlatform('org.codehaus.groovy:groovy-bom:3.0.9')
+}
+

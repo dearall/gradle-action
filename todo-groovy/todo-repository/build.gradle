@@ -1,11 +1,8 @@
 plugins {
     id 'todo.java-conventions'
     id 'java-library'
-    id 'groovy'
+    id 'todo.groovy-conventions'
 }
-
-sourceSets.main.java.srcDirs = []
-sourceSets.main.groovy.srcDirs = ['src/main/java', 'src/main/groovy']
 
 apply from: 'databaseSetup.gradle'
 
