@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-    implementation libs.bundles.groovy
+    implementation libs.groovy.core
 }

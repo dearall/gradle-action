@@ -16,6 +16,8 @@ dependencies {
     implementation project(':todo-model')
     implementation project(':todo-repository')
 
+    implementation libs.groovy.core
+
     providedCompile libs.servlet.api
     providedCompile libs.jsp.api
 

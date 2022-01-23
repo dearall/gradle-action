@@ -4,6 +4,9 @@ plugins {
     id 'groovy'
 }
 
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs = ['src/main/java', 'src/main/groovy']
+
 apply from: 'databaseSetup.gradle'
 
 dependencies {
@@ -11,7 +14,7 @@ dependencies {
     testImplementation(libs.slf4j.simple)
     runtimeOnly(libs.h2)
 
-    implementation libs.bundles.groovy
+    implementation libs.groovy.core
 }
 
 tasks.register('testNG', Test) {
