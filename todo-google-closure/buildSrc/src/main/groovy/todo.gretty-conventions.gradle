@@ -1,0 +1,16 @@
+plugins {
+    //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
+    id "org.gretty"
+}
+
+// configure gretty extension properties
+gretty {
+    servletContainer = 'tomcat9'
+    httpPort = 8080
+    contextPath ="/todo"
+
+    scanInterval = 1 //Scan for changes every second
+    host = '0.0.0.0' //Enable network access from outside your local machine
+    //managedClassReload = true //Activate spring-loaded class reloading
+    integrationTestTask = 'integrationTest'
+}

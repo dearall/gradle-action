@@ -1,0 +1,14 @@
+configurations {
+    jquery
+}
+
+dependencies {
+    jquery group: 'jquery', name: 'jquery', version: '1.12.4', classifier: 'min', ext: 'js'
+}
+
+task fetchExternalJs(type: Copy) {
+    from configurations.jquery
+    into "$webAppDir/js/ext"
+}
+
+war.dependsOn fetchExternalJs

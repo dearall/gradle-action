@@ -1,0 +1,80 @@
+plugins {
+    id 'todo.base-conventions'
+    id 'war'
+}
+
+//功能测试： 创建 functionalTest sourceSet
+def functionalTest = sourceSets.create('functionalTest')
+configurations[functionalTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
+configurations[functionalTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
+
+//注册添加 functionalTest task
+def functionalTestTask = tasks.register('functionalTest', Test) {
+    description = 'Runs functional tests.'
+    group = 'verification'
+
+    testClassesDirs = functionalTest.output.classesDirs
+    classpath = configurations[functionalTest.runtimeClasspathConfigurationName] + functionalTest.output
+
+    useJUnitPlatform()
+    include '**/*'
+
+    // Fail the 'test' task on the first test failure
+    failFast = true
+
+    testLogging {
+        // show standard out and standard error of the test JVM(s) on the console
+        showStandardStreams true
+        // Sets the events to be logged.
+        events "passed", "skipped", "failed"
+    }
+
+    shouldRunAfter(tasks.named('test'))
+
+    forkEvery = 5
+    maxParallelForks = determineMaxParallelForks()
+
+    println 'functionalTest.implementationConfigurationName: ' + functionalTest.implementationConfigurationName
+    println 'functionalTest.runtimeOnlyConfigurationName: ' + functionalTest.runtimeOnlyConfigurationName
+    println 'functionalTest.runtimeClasspathConfigurationName: ' + functionalTest.runtimeClasspathConfigurationName
+
+    // geb 强制属性，指定浏览器类型
+    // systemProperty 'geb.env', 'firefox'
+    systemProperty "geb.env", 'chrome'
+    systemProperty 'geb.build.reportsDir', reporting.file("$name/geb")
+}
+// 太耗时了，单独执行功能测试就可以了
+//tasks.named('check') {
+//    dependsOn(functionalTestTask)
+//}
+
+dependencies {
+    implementation (libs.bundles.groovy) // for spock test using groovy
+
+    testImplementation (libs.junit.jupiter.api)
+    testRuntimeOnly (libs.junit.jupiter.engine)
+    testRuntimeOnly (libs.junit.vintage.engine)
+
+    testImplementation (libs.junit4)
+    testImplementation (libs.testng)
+    testImplementation (libs.spock.core)
+    testImplementation (libs.spock.junit4)
+    testImplementation (libs.geb.spock)
+    testImplementation (libs.geb.junit4)
+
+    // geb and selenium
+    implementation (libs.geb.core)
+    implementation (libs.selenium.java)
+    implementation (libs.selenium.support)
+    implementation (libs.selenium.firefox.driver)
+    implementation (libs.selenium.chrome.driver)
+
+    implementation (libs.webdrivermanager)
+
+    functionalTestImplementation project
+}
+
+static def determineMaxParallelForks() {
+    (Runtime.runtime.availableProcessors() / 2) < 1 ? 1 : Runtime.runtime.availableProcessors() / 2
+}
+

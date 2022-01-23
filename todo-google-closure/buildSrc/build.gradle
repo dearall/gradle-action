@@ -1,0 +1,15 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    gradlePluginPortal() // so that external plugins can be resolved in dependencies section
+}
+
+dependencies {
+    // Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
+    implementation 'org.gretty:gretty:3.0.7'
+    //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
+    implementation 'com.bmuschko:gradle-cargo-plugin:2.8.0'
+}
+

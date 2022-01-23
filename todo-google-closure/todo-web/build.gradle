@@ -1,0 +1,44 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'todo.war-conventions'
+
+    //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
+    id 'todo.gretty-conventions'
+    //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
+    id 'todo.cargo-conventions'
+}
+
+jar {
+    enabled(false)
+}
+
+dependencies {
+    implementation project(':todo-model')
+    implementation project(':todo-repository')
+
+    providedCompile libs.servlet.api
+    providedCompile libs.jsp.api
+
+    runtimeOnly libs.jstl
+    runtimeOnly libs.taglibs.standard.impl
+
+    testImplementation(libs.slf4j.simple)
+}
+
+/**
+ * 针对本机 cargo 运行功能测试
+ * 针对嵌入式 gretty 运行有些问题， gretty:appStart task 在本机不能运行 100% 完成，一直阻塞，无法运行 functionalTest
+ * 也无法执行 appStop 以结束容器运行
+ *
+ * functionalTest task 没有被 check 依赖，需手动执行
+ */
+tasks.named('functionalTest') {
+    dependsOn cargoStartLocal
+    finalizedBy cargoStopLocal
+}
+
+apply from: "jsDependencies.gradle"
+
+//apply from: "jsMinification.gradle"
+apply from: "jsOptimize.gradle"
+

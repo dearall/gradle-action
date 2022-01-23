@@ -1,0 +1,5 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'java-library'
+}
+

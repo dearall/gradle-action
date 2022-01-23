@@ -1,0 +1,6 @@
+plugins{
+    id 'base'
+}
+
+group = 'com.manning.gia.todo'
+version = '1.0.0'
