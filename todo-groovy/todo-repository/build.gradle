@@ -1,0 +1,31 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'java-library'
+    id 'groovy'
+}
+
+apply from: 'databaseSetup.gradle'
+
+dependencies {
+    implementation project(':todo-model')
+    testImplementation(libs.slf4j.simple)
+    runtimeOnly(libs.h2)
+
+    implementation libs.bundles.groovy
+}
+
+tasks.register('testNG', Test) {
+    useTestNG()
+    include "**/*NGTest"
+}
+
+test {
+    // 从默认 test 中排除 testNG 测试
+    exclude "**/*NGTest"
+    dependsOn 'testNG'
+}
+
+tasks.named('integrationTest'){
+    dependsOn startAndPrepareDatabase
+    finalizedBy stopDatabase
+}

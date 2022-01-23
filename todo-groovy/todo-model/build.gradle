@@ -1,0 +1,8 @@
+plugins {
+    id 'todo.java-conventions'
+    id 'groovy'
+}
+
+dependencies {
+    implementation libs.bundles.groovy
+}
