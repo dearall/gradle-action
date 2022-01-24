@@ -2,6 +2,7 @@ plugins {
     id 'todo.java-conventions'
     id 'java-library'
     id 'groovy'
+    id 'todo.jacoco-conventions'
 }
 
 apply from: 'databaseSetup.gradle'

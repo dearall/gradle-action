@@ -1,7 +1,6 @@
 plugins {
     id 'todo.base-conventions'
     id 'java'
-    id 'groovy'
 }
 
 java {
@@ -83,6 +82,7 @@ test {
 tasks.named('check') {
     dependsOn(integrationTestTask)
 }
+
 
 dependencies {
     testImplementation (libs.junit.jupiter.api)
