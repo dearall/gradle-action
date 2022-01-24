@@ -8,6 +8,8 @@ plugins {
     id 'todo.cargo-conventions'
 
     id 'todo.jacoco-conventions'
+
+    id 'todo.checkstyle-conventions'
 }
 
 jar {
