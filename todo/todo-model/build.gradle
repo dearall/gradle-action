@@ -2,5 +2,6 @@ plugins {
     id 'todo.java-conventions'
     id 'java-library'
     id 'todo.checkstyle-conventions'
+    id 'todo.pmd-conventions'
 }
 

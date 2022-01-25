@@ -4,6 +4,7 @@ plugins {
     id 'groovy'
     id 'todo.jacoco-conventions'
     id 'todo.checkstyle-conventions'
+    id 'todo.pmd-conventions'
 }
 
 apply from: 'databaseSetup.gradle'
