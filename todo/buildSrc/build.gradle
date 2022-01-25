@@ -4,6 +4,7 @@ plugins {
 
 repositories {
     gradlePluginPortal() // so that external plugins can be resolved in dependencies section
+    mavenCentral()
 }
 
 dependencies {
@@ -11,5 +12,7 @@ dependencies {
     implementation 'org.gretty:gretty:3.0.7'
     //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
     implementation 'com.bmuschko:gradle-cargo-plugin:2.8.0'
+
+    implementation "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.5"
 }
 

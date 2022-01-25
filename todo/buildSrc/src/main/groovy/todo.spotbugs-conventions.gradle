@@ -1,0 +1,39 @@
+plugins {
+    id 'todo.java-conventions'
+    id "com.github.spotbugs"
+}
+
+spotbugs {
+    toolVersion = '4.5.3'
+
+    ignoreFailures = true
+    showStackTraces = true
+    showProgress = true
+    reportLevel = 'default'
+    effort = 'default'
+    visitors = ['FindSqlInjection', 'SwitchFallthrough']
+//    omitVisitors = ['FindNonShortCircuit']
+    reportsDir = file("$buildDir/reports/spotbugs")
+//    includeFilter = file('spotbugs-include.xml')
+//    excludeFilter = file('spotbugs-exclude.xml')
+//    onlyAnalyze = ['com.foobar.MyClass', 'com.foobar.mypkg.*']
+//    projectName = name
+//    release = version
+//    extraArgs = ['-nested:false']
+    jvmArgs = ['-Duser.language=zh -Duser.region=CN']
+    maxHeapSize = '512m'
+}
+
+import com.github.spotbugs.snom.SpotBugsTask
+
+tasks.withType(SpotBugsTask) {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}
+
+dependencies {
+    implementation 'com.github.spotbugs:spotbugs:4.5.3'
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
+}

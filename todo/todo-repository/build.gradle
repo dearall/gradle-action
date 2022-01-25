@@ -5,6 +5,7 @@ plugins {
     id 'todo.jacoco-conventions'
     id 'todo.checkstyle-conventions'
     id 'todo.pmd-conventions'
+    id 'todo.spotbugs-conventions'
 }
 
 apply from: 'databaseSetup.gradle'

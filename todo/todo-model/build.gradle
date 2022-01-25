@@ -3,5 +3,6 @@ plugins {
     id 'java-library'
     id 'todo.checkstyle-conventions'
     id 'todo.pmd-conventions'
+    id 'todo.spotbugs-conventions'
 }
 
