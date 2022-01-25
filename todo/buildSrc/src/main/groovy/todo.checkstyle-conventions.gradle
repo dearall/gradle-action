@@ -1,19 +1,25 @@
 plugins {
+    id 'todo.java-conventions'
     id 'checkstyle'
 }
 
 checkstyle {
-    toolVersion = '5.9'
-
     ignoreFailures = true
     showViolations = false
+
+    toolVersion = '9.2.1'
+//  toolVersion = '5.9'
+//  gradle 7.3.3 默认输出是： checkstyle toolVersion: 8.37
+    println 'checkstyle toolVersion: ' + toolVersion
+
+//  configFile = configDirectory.file('sun_checks.xml').get().getAsFile()
+    configFile = configDirectory.file('google_checks.xml').get().getAsFile()
 }
 
 tasks.withType(Checkstyle) {
     reports {
         xml.required = false
         html.required = true
-        //html.stylesheet resources.text.fromFile("$rootDir/config/xsl/checkstyle-noframes.xsl")
+        //html.stylesheet resources.text.fromFile("${rootProject.projectDir}/config/xsl/checkstyle-noframes.xsl")
     }
 }
-

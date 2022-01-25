@@ -109,13 +109,17 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
+
+        <!-- 仅支持 checkstyle 5.9 及以下版本
         <module name="LineLength"/>
+        -->
+
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 
-
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+
         <module name="EmptyForIteratorPad"/>
         <module name="GenericWhitespace"/>
         <module name="MethodParamPad"/>
@@ -153,7 +157,9 @@
         <module name="InnerAssignment"/>
         <module name="MagicNumber"/>
         <module name="MissingSwitchDefault"/>
-        <module name="RedundantThrows"/>
+        <!-- 仅支持 checkstyle 5.9 及以下版本
+         <module name="RedundantThrows"/>
+        -->
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
 
