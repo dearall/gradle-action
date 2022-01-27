@@ -29,6 +29,7 @@ dependencies {
     runtimeOnly libs.taglibs.standard.impl
 
     testImplementation(libs.slf4j.simple)
+    testImplementation(libs.hamcrest.core)
 }
 
 /**
