@@ -1,8 +1,6 @@
 package com.manning.gia.todo.repository;
 
 import com.manning.gia.todo.model.ToDoItem;
-import com.manning.gia.todo.repository.InMemoryToDoRepository;
-import com.manning.gia.todo.repository.ToDoRepository;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -9,4 +9,3 @@ dependencies {
     implementation enforcedPlatform(libs.groovy.bom)
     implementation libs.groovy.core
 }
-

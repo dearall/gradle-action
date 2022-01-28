@@ -8,7 +8,7 @@ seleniumVersion = "3.141.59"
 
 
 [libraries]
-
+groovy-bom = {module = "org.codehaus.groovy:groovy-bom", version.ref = "groovy"}
 groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 groovy-json = { module = "org.codehaus.groovy:groovy-json", version.ref = "groovy" }
 groovy-nio = { module = "org.codehaus.groovy:groovy-nio", version.ref = "groovy" }

@@ -1,9 +1,8 @@
 package com.manning.gia.todo.repository
 
-import com.manning.gia.todo.model.ToDoItem
-import spock.lang.Specification
 
-import java.util.List
+import spock.lang.Specification
+import com.manning.gia.todo.model.ToDoItem
 
 class InMemoryToDoRepositorySpec extends Specification {
     def "Insert To Do item"() {

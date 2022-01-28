@@ -10,8 +10,6 @@ dependencies {
     implementation project(':todo-model')
     testImplementation(libs.slf4j.simple)
     runtimeOnly(libs.h2)
-
-    implementation libs.groovy.core
 }
 
 tasks.register('testNG', Test) {

@@ -1,5 +1,6 @@
 plugins {
     id 'todo.java-conventions'
+    id 'todo.groovy-conventions'
     id 'todo.war-conventions'
 
     //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
@@ -28,8 +29,8 @@ dependencies {
     runtimeOnly libs.jstl
     runtimeOnly libs.taglibs.standard.impl
 
-    testImplementation(libs.slf4j.simple)
-    testImplementation(libs.hamcrest.core)
+    testImplementation libs.slf4j.simple
+    testImplementation libs.hamcrest.core
 }
 
 /**
