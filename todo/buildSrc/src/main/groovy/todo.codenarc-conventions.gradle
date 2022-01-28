@@ -1,0 +1,19 @@
+plugins {
+    id 'todo.groovy-conventions'
+    id 'codenarc'
+}
+
+codenarc {
+    ignoreFailures = true
+    toolVersion = '2.2.0'
+
+    // gradle 7.3.3 默认输出是： codenarc toolVersion: 2.0.0
+    //println "codenarc toolVersion: " + toolVersion
+}
+
+tasks.withType(CodeNarc) {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}

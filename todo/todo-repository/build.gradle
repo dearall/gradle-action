@@ -6,6 +6,7 @@ plugins {
     id 'todo.checkstyle-conventions'
     id 'todo.pmd-conventions'
     id 'todo.spotbugs-conventions'
+    id 'todo.codenarc-conventions'
 }
 
 apply from: 'databaseSetup.gradle'
