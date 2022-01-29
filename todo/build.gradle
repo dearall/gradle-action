@@ -9,7 +9,11 @@ sonarqube {
 project(":todo-repository") {
     sonarqube {
         properties {
-            properties["sonar.tests"] += sourceSets.integrationTest.allSource.srcDirs
+            sourceSets.integrationTest.allSource.srcDirs.forEach {
+                if (it.exists()) {
+                    properties["sonar.tests"] += it
+                }
+            }
         }
     }
 }

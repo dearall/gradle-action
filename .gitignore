@@ -1,13 +1,12 @@
-.DS_Store
-build
+.idea
 .gradle
+build
 dist
 target
 out
 *.iml
 *.ipr
 *.iws
-.idea
 bin
 .project
 .classpath
