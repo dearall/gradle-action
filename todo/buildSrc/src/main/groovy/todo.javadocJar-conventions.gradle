@@ -1,0 +1,11 @@
+plugins {
+    id 'todo.java-conventions'
+}
+
+tasks.register('javadocJar', Jar) {
+    archiveBaseName.value project.name
+    classifier 'javadoc'
+    from javadoc.destinationDir
+
+    dependsOn('javadoc')
+}

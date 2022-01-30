@@ -1,0 +1,91 @@
+plugins {
+    id 'todo.groovy-conventions'
+    id 'todo.sourcesJar-conventions'
+    id 'todo.javadocJar-conventions'
+    id 'todo.groovydocJar-conventions'
+}
+
+dependencies {
+    implementation localGroovy()
+    implementation gradleApi()
+    implementation 'com.cloudbees:cloudbees-api-client:1.4.0'
+    testImplementation (libs.spock.core)
+}
+
+test {
+    useJUnitPlatform()
+    enabled false
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives groovydocJar
+}
+
+
+// id 'distribution'
+distributions {
+    main {
+        distributionBaseName = archivesBaseName
+        contents {
+            from{
+                libsDirectory
+            }
+        }
+    }
+    docs {
+//        distributionBaseName = "$archivesBaseName-docs"
+        contents {
+            from(libsDirectory) {
+                include groovydocJar.archiveFileName.get()
+            }
+        }
+    }
+}
+
+distTar.dependsOn(groovydocJar)
+distZip.dependsOn(groovydocJar)
+docsDistTar.dependsOn(groovydocJar)
+docsDistZip.dependsOn(groovydocJar)
+
+// id 'maven-publish'
+publishing {
+    publications {
+        cloudbeesPlugin(MavenPublication) {
+            from components.java
+            artifactId project.name
+
+            pom {
+                name = "Gradle CloudBees plugin"
+                description = 'Gradle plugin for managing applications and databases on CloudBees RUN@cloud.'
+                url = "https://github.com/dearall/todo.git"
+                inceptionYear = '2021'
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id = "johnd"
+                        name = "John Doe"
+                        email = "john.doe@example.com"
+                    }
+                }
+                scm {
+                    connection = "scm:git:https://github.com/dearall/todo.git"
+                    developerConnection = "scm:git:https://github.com/dearall/todo.git"
+                    url = "https://github.com/dearall/todo.git"
+                }
+            }
+
+            artifact sourcesJar
+            artifact groovydocJar
+        }
+    }
+}
+
+

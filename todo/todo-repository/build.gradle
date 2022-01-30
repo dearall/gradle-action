@@ -7,6 +7,16 @@ plugins {
     id 'todo.pmd-conventions'
     id 'todo.spotbugs-conventions'
     id 'todo.codenarc-conventions'
+
+    id 'todo.sourcesJar-conventions'
+    id 'todo.javadocJar-conventions'
+    id 'todo.groovydocJar-conventions'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives groovydocJar
 }
 
 apply from: 'databaseSetup.gradle'
@@ -14,9 +24,9 @@ apply from: 'databaseSetup.gradle'
 dependencies {
     implementation project(':todo-model')
 
+    testImplementation(libs.hamcrest.core)
     testImplementation(libs.slf4j.simple)
     runtimeOnly(libs.h2)
-    testImplementation(libs.hamcrest.core)
 }
 
 tasks.register('testNG', Test) {
@@ -34,3 +44,4 @@ tasks.named('integrationTest'){
     dependsOn startAndPrepareDatabase
     finalizedBy stopDatabase
 }
+

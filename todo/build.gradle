@@ -17,3 +17,35 @@ project(":todo-repository") {
         }
     }
 }
+
+subprojects {
+    apply plugin: 'distribution'
+    apply plugin: 'maven-publish'
+
+/*
+    distributions {
+        main {
+            distributionBaseName = archivesBaseName
+            contents {
+                from{
+                    libsDirectory
+                }
+            }
+        }
+        docs {
+            distributionBaseName = "$archivesBaseName-docs"
+            contents {
+                from(libsDirectory) {
+                    include sourcesJar.archiveFileName.get()
+                    include javadocJar.archiveFileName.get()
+                }
+            }
+        }
+    }
+
+    distTar.dependsOn(jar,sourcesJar,javadocJar)
+    distZip.dependsOn(jar,sourcesJar,javadocJar)
+    docsDistTar.dependsOn(jar,sourcesJar,javadocJar)
+    docsDistZip.dependsOn(jar,sourcesJar,javadocJar)
+    */
+}

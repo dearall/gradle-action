@@ -7,16 +7,24 @@ plugins {
     id 'todo.gretty-conventions'
     //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
     id 'todo.cargo-conventions'
-
     id 'todo.jacoco-conventions'
-
     id 'todo.checkstyle-conventions'
     id 'todo.pmd-conventions'
     id 'todo.spotbugs-conventions'
+
+    id 'todo.sourcesJar-conventions'
+    id 'todo.javadocJar-conventions'
+    id 'todo.groovydocJar-conventions'
 }
 
 jar {
     enabled(false)
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives groovydocJar
 }
 
 dependencies {

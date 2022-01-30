@@ -1,0 +1,9 @@
+plugins {
+    id 'todo.java-conventions'
+}
+
+tasks.register('sourcesJar', Jar) {
+    archiveBaseName.value project.name
+    classifier 'sources'
+    from sourceSets.main.allSource
+}

@@ -3,5 +3,19 @@
 .idea
 # Ignore Gradle build output directory
 build
+dist
+target
+out
+*.iml
+*.ipr
+*.iws
+bin
+.project
+.classpath
+.settings
+*.sublime-project
+*.sublime-workspace
+.vagrant
+
 todo-web/src/main/webapp/js/ext
 java_pid*.hprof

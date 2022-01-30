@@ -1,0 +1,11 @@
+plugins {
+    id 'todo.groovy-conventions'
+}
+
+tasks.register('groovydocJar', Jar) {
+    archiveBaseName.value project.name
+    classifier 'groovydoc'
+    from groovydoc.destinationDir
+
+    dependsOn('groovydoc')
+}
