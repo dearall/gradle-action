@@ -15,17 +15,12 @@ plugins {
     id 'todo.sourcesJar-conventions'
     id 'todo.javadocJar-conventions'
     id 'todo.groovydocJar-conventions'
+
+    id 'todo.distribution-conventions'
 }
 
 jar {
     enabled(false)
-}
-
-artifacts {
-    archives war
-    archives sourcesJar
-    archives javadocJar
-    archives groovydocJar
 }
 
 dependencies {
@@ -40,6 +35,13 @@ dependencies {
 
     testImplementation libs.slf4j.simple
     testImplementation libs.hamcrest.core
+}
+
+artifacts {
+    archives war
+    archives sourcesJar
+    archives javadocJar
+    archives groovydocJar
 }
 
 /**

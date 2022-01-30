@@ -10,6 +10,8 @@ plugins {
     id 'todo.sourcesJar-conventions'
     id 'todo.javadocJar-conventions'
     id 'todo.groovydocJar-conventions'
+
+    id 'todo.distribution-conventions'
 }
 
 artifacts {

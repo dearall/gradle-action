@@ -3,6 +3,7 @@ plugins {
     id 'todo.sourcesJar-conventions'
     id 'todo.javadocJar-conventions'
     id 'todo.groovydocJar-conventions'
+    id 'todo.distribution-conventions'
 }
 
 dependencies {
@@ -12,42 +13,16 @@ dependencies {
     testImplementation (libs.spock.core)
 }
 
-test {
-    useJUnitPlatform()
-    enabled false
-}
-
 artifacts {
     archives sourcesJar
     archives javadocJar
     archives groovydocJar
 }
 
-
-// id 'distribution'
-distributions {
-    main {
-        distributionBaseName = archivesBaseName
-        contents {
-            from{
-                libsDirectory
-            }
-        }
-    }
-    docs {
-//        distributionBaseName = "$archivesBaseName-docs"
-        contents {
-            from(libsDirectory) {
-                include groovydocJar.archiveFileName.get()
-            }
-        }
-    }
+test {
+    useJUnitPlatform()
+    enabled false
 }
-
-distTar.dependsOn(groovydocJar)
-distZip.dependsOn(groovydocJar)
-docsDistTar.dependsOn(groovydocJar)
-docsDistZip.dependsOn(groovydocJar)
 
 // id 'maven-publish'
 publishing {

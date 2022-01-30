@@ -11,17 +11,8 @@ plugins {
     id 'todo.sourcesJar-conventions'
     id 'todo.javadocJar-conventions'
     id 'todo.groovydocJar-conventions'
-}
 
-//java {
-//    withSourcesJar()
-//    withJavadocJar()
-//}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-    archives groovydocJar
+    id 'todo.distribution-conventions'
 }
 
 apply from: 'databaseSetup.gradle'
@@ -32,6 +23,12 @@ dependencies {
     testImplementation(libs.hamcrest.core)
     testImplementation(libs.slf4j.simple)
     runtimeOnly(libs.h2)
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives groovydocJar
 }
 
 tasks.register('testNG', Test) {

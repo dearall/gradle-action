@@ -1,0 +1,28 @@
+plugins{
+    id 'todo.sourcesJar-conventions'
+    id 'todo.javadocJar-conventions'
+    id 'todo.groovydocJar-conventions'
+    id 'distribution'
+}
+
+distributions {
+    main {
+        distributionBaseName = archivesBaseName
+        contents {
+            from{
+                libsDirectory
+            }
+        }
+    }
+    docs {
+        distributionBaseName = "$archivesBaseName-docs"
+        contents {
+            from(libsDirectory) {
+                include sourcesJar.archiveFileName.get()
+                include javadocJar.archiveFileName.get()
+                include groovydocJar.archiveFileName.get()
+            }
+        }
+    }
+}
+
