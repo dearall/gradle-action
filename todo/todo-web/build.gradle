@@ -1,6 +1,5 @@
 plugins {
     id 'todo.java-conventions'
-    id 'todo.groovy-conventions'
     id 'todo.war-conventions'
 
     //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
@@ -17,6 +16,8 @@ plugins {
     id 'todo.groovydocJar-conventions'
 
     id 'todo.distribution-conventions'
+
+    id 'todo.maven-publish-war-conventions'
 }
 
 jar {
@@ -59,3 +60,32 @@ tasks.named('functionalTest') {
 apply from: "jsDependencies.gradle"
 war.dependsOn fetchExternalJs
 apply from: "jsOptimize.gradle"
+
+
+publishing.publications.named(ext.publishName) {
+    pom {
+        name = "todo-web"
+        description = 'Gradle plugin for managing applications and databases on CloudBees RUN@cloud.'
+        url = "https://github.com/dearall/todo.git"
+        inceptionYear = '2021'
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = 'repo'
+            }
+        }
+        developers {
+            developer {
+                id = "johnd"
+                name = "John Doe"
+                email = "john.doe@example.com"
+            }
+        }
+        scm {
+            connection = "scm:git:https://github.com/dearall/todo.git"
+            developerConnection = "scm:git:https://github.com/dearall/todo.git"
+            url = "https://github.com/dearall/todo.git"
+        }
+    }
+}

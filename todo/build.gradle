@@ -17,14 +17,3 @@ project(":todo-repository") {
         }
     }
 }
-
-subprojects {
-    apply plugin: 'distribution'
-    apply plugin: 'maven-publish'
-
-/*
-
-
-
-    */
-}

@@ -1,5 +1,5 @@
 plugins {
-    id 'todo.groovy-conventions'
+    id 'groovy'
 }
 
 tasks.register('groovydocJar', Jar) {
