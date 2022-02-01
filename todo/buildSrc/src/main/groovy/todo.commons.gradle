@@ -1,0 +1,28 @@
+plugins {
+    id 'todo.base-conventions'
+    id 'todo.java-conventions'
+    id 'todo.groovy-conventions'
+    id 'todo.checkstyle-conventions'
+    id 'todo.pmd-conventions'
+    id 'todo.spotbugs-conventions'
+    id 'todo.codenarc-conventions'
+
+    id 'todo.sourcesJar-conventions'
+    id 'todo.javadocJar-conventions'
+    id 'todo.groovydocJar-conventions'
+
+    id 'todo.distribution-conventions'
+}
+
+tasks.register("createBuildInfoFile") {
+    dependsOn(classes)
+
+    doLast {
+        def buildInfoFile = new File("$buildDir/build-info.properties")
+        Properties props = new Properties()
+        props.setProperty('version', project.version.toString())
+        props.setProperty('build', project.version.build ?: '')
+        props.setProperty('timestamp', project.buildTimestamp)
+        props.store(buildInfoFile.newWriter(), null)
+    }
+}

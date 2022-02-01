@@ -1,8 +1,5 @@
 plugins {
-    id 'todo.groovy-conventions'
-    id 'todo.sourcesJar-conventions'
-    id 'todo.javadocJar-conventions'
-    id 'todo.groovydocJar-conventions'
+    id 'todo.java-library'
     id 'todo.distribution-conventions'
     id 'todo.maven-publish-jar-conventions'
 }

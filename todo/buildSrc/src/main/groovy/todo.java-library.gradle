@@ -1,0 +1,10 @@
+plugins {
+    id 'todo.commons'
+}
+
+jar {
+    dependsOn createBuildInfoFile
+    from(buildDir) {
+        include 'build-info.properties'
+    }
+}

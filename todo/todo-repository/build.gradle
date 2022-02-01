@@ -1,19 +1,6 @@
 plugins {
-    id 'todo.java-conventions'
-    id 'java-library'
-    id 'todo.groovy-conventions'
-    id 'todo.jacoco-conventions'
-    id 'todo.checkstyle-conventions'
-    id 'todo.pmd-conventions'
-    id 'todo.spotbugs-conventions'
-    id 'todo.codenarc-conventions'
-
-    id 'todo.sourcesJar-conventions'
-    id 'todo.javadocJar-conventions'
-    id 'todo.groovydocJar-conventions'
-
+    id 'todo.java-library'
     id 'todo.distribution-conventions'
-
     id 'todo.maven-publish-jar-conventions'
 }
 

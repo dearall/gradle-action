@@ -1,5 +1,4 @@
 plugins {
-    id 'todo.java-conventions'
     id 'todo.war-conventions'
 
     //Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
@@ -24,6 +23,15 @@ jar {
     enabled(false)
 }
 
+war {
+    dependsOn createBuildInfoFile
+    from(buildDir) {
+        include 'build-info.properties'
+        into('WEB-INF/classes')
+    }
+
+    println "war archiveFileName: " + archiveFileName.get()
+}
 dependencies {
     implementation project(':todo-model')
     implementation project(':todo-repository')
