@@ -2,6 +2,8 @@ plugins {
     id 'todo.base-conventions'
     id 'todo.java-conventions'
     id 'todo.groovy-conventions'
+    id 'todo.jacoco-conventions'
+
     id 'todo.checkstyle-conventions'
     id 'todo.pmd-conventions'
     id 'todo.spotbugs-conventions'

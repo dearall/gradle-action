@@ -2,10 +2,6 @@ plugins {
     id 'groovy-gradle-plugin'
 }
 
-repositories {
-    gradlePluginPortal() // so that external plugins can be resolved in dependencies section
-    mavenCentral()
-}
 
 dependencies {
     // Advanced gradle plugin for running web-apps on embedded servlet containers jetty and tomcat.
@@ -14,5 +10,10 @@ dependencies {
     implementation 'com.bmuschko:gradle-cargo-plugin:2.8.0'
 
     implementation "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.5"
+    implementation 'com.github.spotbugs:spotbugs:4.5.3'
 }
 
+repositories {
+    mavenCentral()
+    gradlePluginPortal() // if pluginManagement.repositories looks like this, it can be omitted as this is the default
+}

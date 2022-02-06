@@ -4,4 +4,4 @@ plugins{
 }
 
 group = 'com.manning.gia.todo'
-//version = '1.0.0'
+

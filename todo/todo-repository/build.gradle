@@ -1,6 +1,5 @@
 plugins {
     id 'todo.java-library'
-    id 'todo.distribution-conventions'
     id 'todo.maven-publish-jar-conventions'
 }
 

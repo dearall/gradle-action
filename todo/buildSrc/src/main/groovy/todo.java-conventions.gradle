@@ -91,6 +91,8 @@ dependencies {
 
     testImplementation (libs.junit4)
     testImplementation (libs.testng)
+
+    testImplementation platform(libs.spock.bom)
     testImplementation (libs.spock.core)
     testImplementation (libs.spock.junit4)
     testImplementation (libs.bundles.groovy) // for spock test using groovy

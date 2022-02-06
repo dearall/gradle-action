@@ -5,16 +5,6 @@ plugins {
     id 'todo.gretty-conventions'
     //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
     id 'todo.cargo-conventions'
-    id 'todo.jacoco-conventions'
-    id 'todo.checkstyle-conventions'
-    id 'todo.pmd-conventions'
-    id 'todo.spotbugs-conventions'
-
-    id 'todo.sourcesJar-conventions'
-    id 'todo.javadocJar-conventions'
-    id 'todo.groovydocJar-conventions'
-
-    id 'todo.distribution-conventions'
 
     id 'todo.maven-publish-war-conventions'
 }
@@ -23,15 +13,6 @@ jar {
     enabled(false)
 }
 
-war {
-    dependsOn createBuildInfoFile
-    from(buildDir) {
-        include 'build-info.properties'
-        into('WEB-INF/classes')
-    }
-
-    println "war archiveFileName: " + archiveFileName.get()
-}
 dependencies {
     implementation project(':todo-model')
     implementation project(':todo-repository')

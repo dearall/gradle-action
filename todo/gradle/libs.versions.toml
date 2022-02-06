@@ -22,6 +22,7 @@ taglibs-standard-impl = "org.apache.taglibs:taglibs-standard-impl:1.2.5"
 junit-jupiter-api = {module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter"}
 junit-jupiter-engine = {module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter"}
 junit-vintage-engine = {module = "org.junit.vintage:junit-vintage-engine", version.ref = "jupiter"}
+spock-bom = {module="org.spockframework:spock-bom", version.ref = "spock"}
 spock-core = {module = "org.spockframework:spock-core", version.ref = "spock"}
 spock-junit4 = {module = "org.spockframework:spock-junit4", version.ref = "spock"}
 junit4 = "junit:junit:4.13.2"

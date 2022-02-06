@@ -30,7 +30,7 @@ tasks.register('integrationTestReport', JacocoReport) {
     dependsOn integrationTest
 
     reports {
-        xml.required = false
+        xml.required = true
         csv.required = false
         html.required = true
     }

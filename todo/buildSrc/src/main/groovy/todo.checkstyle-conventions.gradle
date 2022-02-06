@@ -6,6 +6,7 @@ plugins {
 checkstyle {
     ignoreFailures = true
     showViolations = false
+    maxWarnings = 0
 
     toolVersion = '9.2.1'
 //  toolVersion = '5.9'

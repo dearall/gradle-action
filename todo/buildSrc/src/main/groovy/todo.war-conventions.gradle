@@ -3,6 +3,16 @@ plugins {
     id 'war'
 }
 
+war {
+    dependsOn createBuildInfoFile
+    from(buildDir) {
+        include 'build-info.properties'
+        into('WEB-INF/classes')
+    }
+
+    println "war archiveFileName: " + archiveFileName.get()
+}
+
 //功能测试： 创建 functionalTest sourceSet
 def functionalTest = sourceSets.create('functionalTest')
 configurations[functionalTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
