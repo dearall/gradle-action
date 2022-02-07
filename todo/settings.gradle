@@ -13,7 +13,7 @@ include 'todo-model', 'todo-repository', 'todo-web', 'cloudbees-plugin'
 enableFeaturePreview('VERSION_CATALOGS')
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    //repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         //aliyun.com
         maven { url 'https://maven.aliyun.com/repository/public' }          // public aliyun central仓和jcenter仓的聚合仓

@@ -1,0 +1,6 @@
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal() // if pluginManagement.repositories looks like this, it can be omitted as this is the default
+    }
+}
