@@ -1,4 +1,5 @@
 plugins {
+    id 'war'
     //Gradle plugin that provides deployment capabilities to local and remote containers via Cargo.
     id "com.bmuschko.cargo"
 }
@@ -9,15 +10,17 @@ cargo {
     port = 8080
 
     deployable {
-        file = "build/libs/todo-web-${version}.war"
+        file = "$buildDir/libs/todo-web-${version}.war"
         context = '/todo'
+
+        println "cargo.deployable.file: " + file
     }
 
     //部署至远程主机 tomcat9 安装实例
     remote {
         hostname = 'tomcat.sansovo.org'
         username = 'tomcat'
-        password = 'tomcat'
+        password = '32147'
     }
     //部署至本机 tomcat9 安装实例
     local {
