@@ -9,7 +9,7 @@ cargo {
     port = 8080
 
     deployable {
-        file = 'build/libs/todo-web-1.0.0.war'
+        file = "build/libs/todo-web-${version}.war"
         context = '/todo'
     }
 
@@ -21,7 +21,7 @@ cargo {
     }
     //部署至本机 tomcat9 安装实例
     local {
-        homeDir = file(/D:\env\tomcat\apache-tomcat-9.0.56/)
+        homeDir = file(/D:\env\tomcat\apache-tomcat-9.0.58/)
         containerProperties {
             property 'cargo.tomcat.ajp.port', 8009
         }
