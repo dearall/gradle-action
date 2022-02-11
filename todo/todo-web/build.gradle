@@ -78,3 +78,30 @@ publishing.publications.named(ext.publishName) {
         }
     }
 }
+
+// configure cargo extension properties
+cargo {
+    containerId = 'tomcat9x'
+    port = 8080
+
+    deployable {
+        file = "$buildDir/libs/todo-web-${version}.war"
+        context = '/todo'
+
+        println "cargo.deployable.file: " + file
+    }
+
+    //部署至远程主机 tomcat9 安装实例
+    remote {
+        hostname = 'tomcat-test.sansovo.org'
+        username = 'tomcat'
+        password = '32147'
+    }
+    //部署至本机 tomcat9 安装实例
+    local {
+        homeDir = file(/D:\env\tomcat\apache-tomcat-9.0.58/)
+        containerProperties {
+            property 'cargo.tomcat.ajp.port', 8009
+        }
+    }
+}

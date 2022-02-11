@@ -9,11 +9,14 @@ buildscript {
 
 ext.h2TcpPort = 9092
 ext.h2StartupBlockMs = 2000
+ext.tcpPassword = '32147'
 
 task startDatabase(type: H2DatabaseStarter) {
     group = 'database'
     description = 'Starts database.'
+
     tcpPort = h2TcpPort
+    passwordForShutdown = tcpPassword
     blockMs = h2StartupBlockMs
 }
 
@@ -22,7 +25,7 @@ task stopDatabase(type: JavaExec) {
     description = 'Stops database.'
     classpath = buildscript.configurations.classpath
     mainClass = 'org.h2.tools.Server'
-    args = ['-tcpShutdown', "tcp://localhost:${h2TcpPort}"]
+    args = ['-tcpShutdown', "tcp://localhost:${h2TcpPort}", '-tcpPassword', "${tcpPassword}"]
 }
 
 task buildSchema(type: JavaExec, dependsOn: startDatabase) {
@@ -41,24 +44,29 @@ class H2DatabaseStarter extends DefaultTask {
     Integer tcpPort
 
     @Input
+    String  passwordForShutdown
+
+    @Input
     Integer blockMs
 
     @TaskAction
     void start() {
-        new Thread(new H2Server(tcpPort)).start()
+        new Thread(new H2Server(tcpPort, passwordForShutdown)).start()
         Thread.sleep(blockMs)
     }
 
     private class H2Server implements Runnable {
         final Integer tcpPort
+        final String  passwordForShutdown
 
-        H2Server(Integer tcpPort) {
+        H2Server(Integer tcpPort, String passwordForShutdown) {
             this.tcpPort = tcpPort
+            this.passwordForShutdown = passwordForShutdown
         }
 
         @Override
         void run() {
-            org.h2.tools.Server.main('-tcp', '-tcpPort', tcpPort.toString())
+            org.h2.tools.Server.main('-tcp', '-tcpPort', tcpPort.toString(), '-tcpPassword', passwordForShutdown)
         }
     }
 }

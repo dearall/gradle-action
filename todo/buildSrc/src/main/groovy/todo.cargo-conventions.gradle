@@ -4,7 +4,7 @@ plugins {
     id "com.bmuschko.cargo"
 }
 
-// configure cargo extension properties
+/*// configure cargo extension properties
 cargo {
     containerId = 'tomcat9x'
     port = 8080
@@ -18,7 +18,7 @@ cargo {
 
     //部署至远程主机 tomcat9 安装实例
     remote {
-        hostname = 'tomcat.sansovo.org'
+        hostname = 'tomcat-test.sansovo.org'
         username = 'tomcat'
         password = '32147'
     }
@@ -29,4 +29,4 @@ cargo {
             property 'cargo.tomcat.ajp.port', 8009
         }
     }
-}
+}*/
