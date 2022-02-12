@@ -93,7 +93,7 @@ cargo {
 
     //部署至远程主机 tomcat9 安装实例
     remote {
-        hostname = 'tomcat-test.sansovo.org'
+        hostname = 'tomcat.sansovo.org'
         username = 'tomcat'
         password = '32147'
     }
