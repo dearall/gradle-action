@@ -83,7 +83,6 @@ tasks.named('check') {
     dependsOn(integrationTestTask)
 }
 
-
 dependencies {
     testImplementation (libs.junit.jupiter.api)
     testRuntimeOnly (libs.junit.jupiter.engine)

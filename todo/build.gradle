@@ -19,3 +19,5 @@ project(":todo-repository") {
         }
     }
 }
+
+//println project.version.toString()

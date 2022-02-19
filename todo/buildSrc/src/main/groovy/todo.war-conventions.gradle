@@ -18,45 +18,57 @@ def functionalTest = sourceSets.create('functionalTest')
 configurations[functionalTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
 configurations[functionalTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
 
-//注册添加 functionalTest task
-def functionalTestTask = tasks.register('functionalTest', Test) {
-    description = 'Runs functional tests.'
-    group = 'verification'
+// The drivers we want to use
+def drivers = ["firefox", "chrome", "chromeHeadless"]
 
-    testClassesDirs = functionalTest.output.classesDirs
-    classpath = configurations[functionalTest.runtimeClasspathConfigurationName] + functionalTest.output
+drivers.each { driver ->
+    //注册添加 functionalTest task
+    def functionalTestTask = tasks.register("${driver}FunctionalTest", Test) {
+        group = 'verification'
+        description = "Runs remote functional tests with ${driver}"
 
-    useJUnitPlatform()
-    include '**/*'
+        testClassesDirs = functionalTest.output.classesDirs
+        classpath = configurations[functionalTest.runtimeClasspathConfigurationName] + functionalTest.output
 
-    // Fail the 'test' task on the first test failure
-    failFast = true
+        useJUnitPlatform()
+        include '**/*'
 
-    testLogging {
-        // show standard out and standard error of the test JVM(s) on the console
-        showStandardStreams true
-        // Sets the events to be logged.
-        events "passed", "skipped", "failed"
+        // Fail the 'test' task on the first test failure
+        failFast = true
+
+        testLogging {
+            // show standard out and standard error of the test JVM(s) on the console
+            showStandardStreams true
+            // Sets the events to be logged.
+            events "passed", "skipped", "failed"
+        }
+
+        shouldRunAfter(tasks.named('test'))
+
+        forkEvery = 5
+        maxParallelForks = determineMaxParallelForks()
+
+        println 'functionalTest.implementationConfigurationName: ' + functionalTest.implementationConfigurationName
+        println 'functionalTest.runtimeOnlyConfigurationName: ' + functionalTest.runtimeOnlyConfigurationName
+        println 'functionalTest.runtimeClasspathConfigurationName: ' + functionalTest.runtimeClasspathConfigurationName
+
+        outputs.upToDateWhen { false }  // Always run tests
+
+        // geb 强制属性，指定浏览器类型
+        systemProperty "geb.env", driver
+        systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
+        systemProperty 'geb.build.baseUrl', "http://localhost:8080/todo/"
     }
-
-    shouldRunAfter(tasks.named('test'))
-
-    forkEvery = 5
-    maxParallelForks = determineMaxParallelForks()
-
-    println 'functionalTest.implementationConfigurationName: ' + functionalTest.implementationConfigurationName
-    println 'functionalTest.runtimeOnlyConfigurationName: ' + functionalTest.runtimeOnlyConfigurationName
-    println 'functionalTest.runtimeClasspathConfigurationName: ' + functionalTest.runtimeClasspathConfigurationName
-
-    // geb 强制属性，指定浏览器类型
-    // systemProperty 'geb.env', 'firefox'
-    systemProperty "geb.env", 'chrome'
-    systemProperty 'geb.build.reportsDir', reporting.file("$name/geb")
 }
+
 // 太耗时了，单独执行功能测试就可以了
-//tasks.named('check') {
-//    dependsOn(functionalTestTask)
-//}
+tasks.register('functionalTest') {
+    dependsOn(firefoxFunctionalTest, chromeFunctionalTest, chromeHeadlessFunctionalTest)
+
+    group = 'verification'
+    description = "Runs remote functional tests with 'firefox', 'chrome', 'chrome --headless --disable-gpu' by geb " +
+            "and selenium tools."
+}
 
 dependencies {
     implementation (libs.bundles.groovy) // for spock test using groovy
